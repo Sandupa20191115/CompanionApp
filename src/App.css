@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 body {
-  background-image: url("./images/Flat-Mountains.svg");
+  background-image: url("images/toDoBg.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -151,4 +151,22 @@ select {
   color: black;
   pointer-events: none;
   border-radius: 50px;
+}
+
+/********************************Date and Time**************************************/
+.dateTime{
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  font-size: 40px;
+  /*height: 50vh;*/
+  padding-top: 50px;
+  margin: 0 35%;
+}
+
+.time{
+}
+.date{
+
 }
