@@ -8,13 +8,13 @@ body {
   /*background: #fc3455;*/
   background-image: url("images/mountains.png"); /* fallback */
   /*background-image: url("images/toDoBg.jpg"), linear-gradient(#eb01a5, #d13531); !* W3C *!*/
+  background: linear-gradient(100.06deg, #FC254C 8.13%, #240B36 93.73%);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   color: white;
   font-family: "Poppins", sans-serif;
   min-height: 100vh;
-  background: linear-gradient(100.06deg, #FC254C 8.13%, #240B36 93.73%);
 }
 header {
   font-size: 2rem;
@@ -224,12 +224,43 @@ select {
   display: inline-block;
 }
 
-.loginLink{
+.altLink{
   transition: all .2s ease-in-out;
   cursor: pointer;
   margin-top: -2%;
 }
 
-.loginLink:hover{
+.altLink:hover{
   color: black;
+}
+
+.miniAlt{
+  display: none;
+}
+
+@media (max-width:975px) {
+  .alt{
+    display: none;
+  }
+  .formContainer{
+    flex-direction: column;
+  }
+
+  .miniAlt{
+    display: flex;
+    align-self: center;
+    margin-top: -10%;
+    margin-bottom: 10%;
+    font-size: 80%;
+  }
+
+  .altLinkMini{
+    transition: all .2s ease-in-out;
+    cursor: pointer;
+  }
+
+  .altLinkMini:hover{
+    color: #FC254C;
+  }
+
 }

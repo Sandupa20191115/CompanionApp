@@ -2,20 +2,20 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import {ValidatorForm, TextValidator} from "react-material-ui-form-validator";
 import "./FormRegister.css";
+import {FormField} from "./FormField";
+import loader from "../images/tail-spin.svg";
 
-const formValid = formErrors => {
+const formValid = (formErrors) => {
     let valid = true;
 
-    Object.values(formErrors).forEach(val => {
-        val.length > 0 && (valid = false)
+    Object.values(formErrors).forEach((val) => {
+        val.length > 0 && (valid = false);
     });
 
     return valid;
-
-}
+};
 
 class FormLogIn extends React.Component {
-
     constructor(props) {
         super(props);
 
@@ -25,44 +25,61 @@ class FormLogIn extends React.Component {
             formErrors: {
                 email: "",
                 password: "",
-            }
-        }
+            },
+            loading: false
+        };
     }
 
-    handleSubmit = event => {
+    handleSubmit = async (event) => {
         event.preventDefault();
 
         let formErrors = this.state.formErrors;
 
-        if(this.state.email === "") formErrors.email = "This is a required field";
-        if(this.state.password === "") formErrors.password = "This is a required field";
-        // if (this.state.email === "" || this.state.password === "") {
-        //     console.log("Cannot leave empty");
-        // }
+        if (this.state.email === "") formErrors.email = "This is a required field";
+        if (this.state.password === "")
+            formErrors.password = "This is a required field";
+
         if (formValid(this.state.formErrors)) {
             console.log(this.state);
 
             const newUser = {
-                method : "POST",
-                headers: { 'Content-Type': 'application/json' },
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                },
                 body: JSON.stringify({
-                    email : this.state.email,
-                    password : this.state.password
-                })
-            }
+                    email: this.state.email,
+                    password: this.state.password,
+                }),
+            };
 
-            fetch("http://localhost:3500/api/user/login",newUser)
-                .then(response => response.json())
-                .then(data => console.log(data));
+            // fetch("http://localhost:3500/api/user/login", newUser)
+            //   .then((response) => response.json())
+            //   .then((data) => console.log(data));
+
+            let loading = true;
+            this.setState({loading});
+            console.log(loading);
+
+            const res = await fetch("http://localhost:3500/api/user/login", newUser);
+            const json = await res.json();
+            console.log(json);
+
+            loading = false;
+            this.setState({loading});
+            console.log(loading);
+
+            console.log("----");
 
         } else {
             console.error("INVALID");
         }
 
         this.setState({formErrors});
-    }
+    };
 
-    handleChange = event => {
+    handleChange = (event) => {
         event.preventDefault();
         const {name, value} = event.target;
         let formErrors = this.state.formErrors;
@@ -71,67 +88,67 @@ class FormLogIn extends React.Component {
             case "email":
                 // formErrors.email = emailRegex.test(value) < 3 && value.length > 0 ? "" : "Not a valid Email";
                 if (!value.includes("@")) {
-                    console.log(value)
                     formErrors.email = "Invalid email";
                 } else {
-                    formErrors.email = ""
+                    formErrors.email = "";
                 }
                 break;
 
             case "password":
-                formErrors.password = value.length < 6 && value.length > 0 ? "minimum 6 character" : "";
+                formErrors.password =
+                    value.length < 6 && value.length > 0 ? "minimum 6 character" : "";
                 break;
 
             default:
                 break;
         }
 
-        this.setState({formErrors, [name]: value})
-    }
+        this.setState({formErrors, [name]: value});
+    };
+
 
     render() {
-
         const formErrors = this.state.formErrors;
+        const loading = this.state.loading;
 
         return (
-            <div className={"login"}>
-                <h1>Log In</h1>
-                <form onSubmit={this.handleSubmit} noValidate>
+            <>
+                {!loading ?
+                    <div className={"login"}>
+                        <h1>Log In</h1>
+                        <form onSubmit={this.handleSubmit} noValidate>
+                            <FormField
+                                formErrors={formErrors}
+                                type={"text"}
+                                name={"email"}
+                                handleChange={this.handleChange}
+                            />
+                            <FormField
+                                formErrors={formErrors}
+                                type={"password"}
+                                name={"password"}
+                                handleChange={this.handleChange}
+                            />
 
-                    <div className={"email"}>
-                        <label htmlFor={"email"}>Email</label>
-                        <input
-                            type={"email"}
-                            name={"email"}
-                            onChange={this.handleChange}
-                            placeholder={"Email"}
-                        />
-                        {formErrors.email && <span>{formErrors.email}</span>}
+                            <div className={"btnContainer"}>
+                                <button type={"login"}>Log In</button>
+                            </div>
+                        </form>
+                    </div> :
+                    <div className={"login"}>
+                        <img src={loader}/>
                     </div>
-                    <div className={"password"}>
-                        <label htmlFor={"password"}>Password</label>
-                        <input
-                            type={"text"}
-                            name={"password"}
-                            onChange={this.handleChange}
-                            placeholder={"Password"}
-                        />
-                        {formErrors.password && <span>{formErrors.password}</span>}
-                    </div>
-
-                    <div className={"btnContainer"}>
-                        <button type={"login"}>Log In</button>
-                    </div>
-
-                </form>
-            </div>
+                }
+            </>
         );
     }
+
 }
 
 export default FormLogIn;
 
 // {
+
 //     "name" : "Sandupa Egodage",
 //     "email" :"sanduBatman2@gmail.com",
 //     "password":"sandu1234"
