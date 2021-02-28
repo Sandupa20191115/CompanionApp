@@ -1,6 +1,6 @@
 import React,{Component} from "react";
 
-export class DateTime extends Component{
+export default class DateTime extends Component{
     constructor() {
         super();
         this.state = {

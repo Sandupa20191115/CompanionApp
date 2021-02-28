@@ -31,6 +31,11 @@ class FormRegister extends React.Component {
                 confPassword: "",
             },
             loading: false,
+            response:{
+                username:"",
+                error:"",
+                id: 0
+            }
         };
     }
 
@@ -68,9 +73,21 @@ class FormRegister extends React.Component {
             const json = await res.json();
             console.log(json);
 
+            const response = {
+                error: json.error,
+                username: this.state.username,
+                id : json.user
+            };
+
+            this.setState({response});
+            console.log(this.state.response)
+
             loading = false;
             this.setState({loading});
             console.log(loading);
+
+            if(!response.error)
+                this.props.routing(true,"Hello "+response.username+"Welcome",response.username);
 
         } else {
             console.error("INVALID");
@@ -158,6 +175,7 @@ class FormRegister extends React.Component {
                             <div className={"btnContainer"}>
                                 <button type={"submit"}>Register</button>
                             </div>
+                            {this.state.response.error && <span>{this.state.response.error}</span>}
                         </form>
                     </div> :
                     <div className={"register"}>

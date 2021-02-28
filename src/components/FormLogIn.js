@@ -26,7 +26,12 @@ class FormLogIn extends React.Component {
                 email: "",
                 password: "",
             },
-            loading: false
+            loading: false,
+            response:{
+                username:"",
+                error:"",
+                id: 0
+            }
         };
     }
 
@@ -60,17 +65,24 @@ class FormLogIn extends React.Component {
 
             let loading = true;
             this.setState({loading});
-            console.log(loading);
 
             const res = await fetch("http://localhost:3500/api/user/login", newUser);
             const json = await res.json();
             console.log(json);
+            const response = {
+                error: json.error,
+                username: json.user,
+                id : json.id
+            };
+
+            this.setState({response});
+            console.log(this.state.response)
 
             loading = false;
             this.setState({loading});
-            console.log(loading);
 
-            console.log("----");
+            if(!response.error)
+                this.props.routing(true,"Hello "+response.username+", Welcome Back",response.username);
 
         } else {
             console.error("INVALID");
@@ -133,6 +145,7 @@ class FormLogIn extends React.Component {
                             <div className={"btnContainer"}>
                                 <button type={"login"}>Log In</button>
                             </div>
+                            {this.state.response.error && <span>{this.state.response.error}</span>}
                         </form>
                     </div> :
                     <div className={"login"}>
