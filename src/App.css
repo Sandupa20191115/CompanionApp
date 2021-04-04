@@ -8,13 +8,13 @@ body {
   /*background: #fc3455;*/
   background-image: url("images/mountains.png"); /* fallback */
   /*background-image: url("images/toDoBg.jpg"), linear-gradient(#eb01a5, #d13531); !* W3C *!*/
-  background: linear-gradient(100.06deg, #FC254C 8.13%, #240B36 93.73%);
+  background: linear-gradient(100.06deg, #fc254c 8.13%, #240b36 93.73%);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   color: white;
   font-family: "Poppins", sans-serif;
-  min-height: 100vh;
+  /* min-height: 100vh; */
 }
 header {
   font-size: 2rem;
@@ -32,18 +32,19 @@ header,
 .todoForm input,
 .todoForm button {
   padding-left: 25px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  font-size: 25px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: 20px;
   border: none;
-  background: white;
+  background: #fc254c;
   outline: none;
-  font-family: "Poppins", sans-serif;
+  font-family: "Quicksand", sans-serif;
   border-radius: 50px;
   margin: 0 10px;
 }
 .todoForm button {
-  color: #f5d782;
+  background: #d4e2e1;
+  font-family: "Quicksand";
   cursor: pointer;
   transition: all 0.1s ease;
   background: none;
@@ -66,18 +67,24 @@ header,
 
 .todo {
   margin: 0.5rem;
-  background: #f5d782;
-  font-size: 1.5rem;
+  background: #d4e2e1;
+  font-size: 20px;
+  font-family: "Quicksand";
   color: black;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 5px;
+  /* padding: 5px; */
   border-radius: 50px;
   transition: all 1s ease;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 .filter-todo {
-  padding: 1rem;
+  /* padding: 1rem; */
+  background: #d4e2e1;
+  padding-left: 25px;
+  padding-right: 25px;
 }
 .todo li {
   flex: 1;
@@ -86,16 +93,12 @@ header,
 .trash-btn,
 .complete-btn {
   background: none;
-  color: #ff0000;
+  color: #fc254c;
   border: none;
   padding: 1rem;
   cursor: pointer;
   font-size: 20px;
   outline: none;
-}
-.complete-btn {
-  background: none;
-  color: #4fd81f;
 }
 .todo-item {
   padding: 0rem 0.5rem;
@@ -128,25 +131,20 @@ select {
   border: 0 !important;
   background-image: none;
   border-radius: 50px;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  /* padding-top: 0.5rem;
+  padding-bottom: 0.5rem; */
 }
 
-/* Custom Select */
-.select {
-  margin: 1rem;
-  position: relative;
-  overflow: hidden;
+.select select {
+  font-size: 20px;
+  font-family: "Quicksand";
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
-select {
-  font-family: "Poppins", sans-serif;
-  cursor: pointer;
-  font-size: 16px;
-  width: 12rem;
-  height: 60px;
-}
+
 /* Arrow */
 .select::after {
+  display: none;
   content: "\25BC";
   position: absolute;
   top: 15px;
@@ -157,37 +155,51 @@ select {
   border-radius: 50px;
 }
 
+.todo-button {
+  background: #d4e2e1;
+}
+
+.todo-button:hover {
+  background: #fc254c;
+}
+
+.todo-input {
+  width: 30%;
+  color: #ffffff;
+}
+
+::placeholder {
+  color: rgb(255, 255, 255);
+  opacity: 0.8; /* Firefox */
+}
+
 /********************************Date and Time**************************************/
-.dateTime{
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
+.dateTime {
+  color: #240b36;
   font-size: 40px;
-  /*height: 50vh;*/
-  padding-top: 50px;
-  margin: 0 35%;
+  margin-left: 35px;
+  margin-right: 35px;
 }
 
 /**************form************/
-.formContainer{
+.formContainer {
   color: black;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   display: flex;
   justify-content: center;
-  -webkit-box-shadow: 6px 6px 24px 4px rgba(0,0,0,0.4);
-  box-shadow: 6px 6px 15px 4px rgba(0,0,0,0.05);
+  -webkit-box-shadow: 6px 6px 24px 4px rgba(0, 0, 0, 0.4);
+  box-shadow: 6px 6px 15px 4px rgba(0, 0, 0, 0.05);
   border-radius: 50px;
   background: white;
   flex-direction: row;
   user-select: none;
 }
 
-.alt{
-  background: #FC254C;
+.alt {
+  background: #fc254c;
   border-radius: 0 50px 50px 0;
   width: 550px;
   display: flex;
@@ -196,18 +208,18 @@ select {
   padding-left: 3%;
 }
 
-.alt img{
+.alt img {
   position: absolute;
   width: 65%;
 }
 
-.alt h1{
+.alt h1 {
   color: white;
   z-index: 1;
   font-size: 85px;
 }
 
-.alt h3{
+.alt h3 {
   font-family: "Quicksand", sans-serif;
   color: white;
   z-index: 1;
@@ -217,36 +229,36 @@ select {
   width: 65%;
 }
 
-.alt h2{
+.alt h2 {
   font-size: 30px;
   z-index: 1;
   color: white;
   display: inline-block;
 }
 
-.altLink{
-  transition: all .2s ease-in-out;
+.altLink {
+  transition: all 0.2s ease-in-out;
   cursor: pointer;
   margin-top: -2%;
 }
 
-.altLink:hover{
+.altLink:hover {
   color: black;
 }
 
-.miniAlt{
+.miniAlt {
   display: none;
 }
 
-@media (max-width:975px) {
-  .alt{
+@media (max-width: 975px) {
+  .alt {
     display: none;
   }
-  .formContainer{
+  .formContainer {
     flex-direction: column;
   }
 
-  .miniAlt{
+  .miniAlt {
     display: flex;
     align-self: center;
     margin-top: -10%;
@@ -254,15 +266,16 @@ select {
     font-size: 80%;
   }
 
-  .altLinkMini{
-    transition: all .2s ease-in-out;
+  .altLinkMini {
+    transition: all 0.2s ease-in-out;
     cursor: pointer;
   }
 
-  .altLinkMini:hover{
-    color: #FC254C;
+  .altLinkMini:hover {
+    color: #fc254c;
   }
-
 }
 
-.ignore-css{all:unset;}
+.ignore-css {
+  all: unset;
+}
